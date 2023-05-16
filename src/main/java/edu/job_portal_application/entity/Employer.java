@@ -23,7 +23,7 @@ public class Employer {
 	private long employePasssword;
 	
 	
-	@OneToMany
+	@OneToMany(mappedBy = "employer")
 	private List<Job> jobs;
 	
 	

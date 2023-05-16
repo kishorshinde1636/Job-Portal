@@ -6,8 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -23,10 +26,12 @@ public class Applicant {
 	private int applicatPassword;
 	private long applicantPhNo;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "applicant")
+	@JsonIgnore
 	private List<JobApplication> jobApplications;
 
 	@OneToOne
+	@JoinColumn
 	private Resume resume;
 
 	
