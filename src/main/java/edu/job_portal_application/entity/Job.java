@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -27,6 +29,7 @@ public class Job {
 	private LocalDateTime jobCreateDateTime;
 	
 	@OneToMany(mappedBy = "job")
+	@JsonIgnore
 	private List<JobApplication> jobApplication;
 
 	@ManyToOne

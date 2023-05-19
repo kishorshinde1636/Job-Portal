@@ -29,4 +29,9 @@ public class ApplicantDao {
 		}
 	}
 
+	public void deleteApplicant(Applicant applicant) {
+		applicantRepo.delete(applicant);
+
+	}
+
 }

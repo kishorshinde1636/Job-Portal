@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -24,6 +26,7 @@ public class Employer {
 	
 	
 	@OneToMany(mappedBy = "employer")
+	@JsonIgnore
 	private List<Job> jobs;
 	
 	
