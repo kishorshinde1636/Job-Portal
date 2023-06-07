@@ -1,5 +1,7 @@
 package edu.job_portal_application.service;
 
+import java.util.Optional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,6 +50,27 @@ public class ResumeService {
 		} else {
 			return null;
 			// throw new ApplicantNotFoundByIdException("Failed to add resume!!");
+		}
+
+	}
+
+	public ResponseEntity<ResponseStructure<Resume>> getResumeById(int resumeId) {
+
+		Optional<Resume> optional = resumeDao.getResumeById(resumeId);
+
+		/**
+		 * this method is used for both save and update resume.
+		 */
+		if (optional.isPresent()) {
+			ResponseStructure<Resume> responseStructure = new ResponseStructure<>();
+			responseStructure.setStatusCode(HttpStatus.FOUND.value());
+			responseStructure.setMessage("Resume added/updated successfully!!");
+			responseStructure.setData(optional.get());
+
+			return new ResponseEntity<ResponseStructure<Resume>>(responseStructure, HttpStatus.FOUND);
+		} else {
+			return null;
+			// throw new ResumeNotFoundByIdException("Failed to find resume!!");
 		}
 
 	}

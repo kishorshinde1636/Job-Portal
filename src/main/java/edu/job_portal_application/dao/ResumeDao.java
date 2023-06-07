@@ -18,20 +18,15 @@ public class ResumeDao {
 		return resumeRepo.save(resume);
 	}
 
-	public Resume getresumeById(int resumeId) {
+	public Optional<Resume> getResumeById(int resumeId) {
 
-		Optional<Resume> resume = resumeRepo.findById(resumeId);
-		if (resume.isEmpty()) {
-			return null;
-		} else {
-			return resume.get();
-		}
+		return resumeRepo.findById(resumeId);
 	}
 
 	public void deleteResume(Resume resume) {
-
+		
 		resumeRepo.delete(resume);
-
+		
 	}
 
 }

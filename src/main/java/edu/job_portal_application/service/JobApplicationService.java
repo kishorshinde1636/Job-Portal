@@ -13,6 +13,8 @@ import edu.job_portal_application.dao.JobDao;
 import edu.job_portal_application.entity.Applicant;
 import edu.job_portal_application.entity.Job;
 import edu.job_portal_application.entity.JobApplication;
+import edu.job_portal_application.exception.ApplicantNotfoundByIdException;
+import edu.job_portal_application.exception.jobNotFoundByIdException;
 import edu.job_portal_application.util.ResponseStructure;
 
 @Service
@@ -58,14 +60,13 @@ public class JobApplicationService {
 				return new ResponseEntity<ResponseStructure<JobApplication>>(responseStructure, HttpStatus.CREATED);
 
 			} else {
-				return null;
-				// throw new jobNotFoundByIdException("Failed to create job Application!!");
+				//return null;
+				 throw new jobNotFoundByIdException("Failed to create job Application!!");
 			}
 
 		} else {
-			// throw new ApplicantNotfoundByIdException("Failed to create Job
-			// Application!!");
-			return null;
+			 throw new ApplicantNotfoundByIdException("Failed to create Job Application!!");
+			//return null;
 		}
 	}
 

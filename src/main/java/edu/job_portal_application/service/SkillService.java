@@ -1,5 +1,7 @@
 package edu.job_portal_application.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,22 +32,31 @@ public class SkillService {
 		if (applicant != null) {
 			Resume resume = applicant.getResume();
 			if (resume != null) {
+				/*
+				 * - iterate over the String arrays skills that is received check if the skill
+				 * is present with matching name with the user, if present do not add to the
+				 * user again, or else create an new skill
+				 */
+				List<Skill> exSkills = resume.getSkills();
 				for (String skill : skills) {
 					Skill existingSkill = skillDao.getSkillByName(skill);
 
-					if (!resume.getSkills().contains(existingSkill)) {
-
-						if (existingSkill != null) {
-							resume.getSkills().add(existingSkill);
-						} else {
-							Skill newSkills = new Skill();
-							newSkills.setSkillName(skill);
-							resume.getSkills().add(newSkills);
+					if (existingSkill != null) {
+						if (!exSkills.contains(existingSkill)) {
+							exSkills.add(existingSkill);
 						}
-
+					} else {
+						Skill newSkills = new Skill();
+						newSkills.setSkillName(skill);
+						skillDao.addSkill(newSkills);
+						exSkills.add(newSkills);
 					}
 
 				}
+				/*
+				 * setting the exSkills list to the resume
+				 */
+				resume.setSkills(exSkills);
 
 				resume = resumeDao.saveResume(resume);
 

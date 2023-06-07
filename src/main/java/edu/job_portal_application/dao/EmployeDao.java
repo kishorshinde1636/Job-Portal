@@ -30,4 +30,10 @@ public class EmployeDao {
 
 	}
 
+	public void deleteEmployerById(Employer employer) {
+		
+		employerRepo.delete(employer);
+		
+	}
+
 }

@@ -1,5 +1,7 @@
 package edu.job_portal_application.dto;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,5 +13,7 @@ public class JobDto {
 	private String jobDiscription;
 	private double jobSalary;
 	private String company;
+	
+	private List<String> skills;
 
 }

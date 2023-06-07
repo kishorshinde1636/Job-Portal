@@ -15,6 +15,7 @@ import edu.job_portal_application.entity.Applicant;
 import edu.job_portal_application.entity.JobApplication;
 import edu.job_portal_application.entity.Project;
 import edu.job_portal_application.entity.Resume;
+import edu.job_portal_application.exception.ApplicantNotfoundByIdException;
 import edu.job_portal_application.util.ResponseStructure;
 
 @Service
@@ -62,8 +63,8 @@ public class ApplicantService {
 
 			return new ResponseEntity<ResponseStructure<ApplicantDto>>(responseStructure, HttpStatus.FOUND);
 		} else {
-			return null;
-			// throw new ApplicantNotfoundByIdException("Failed to find Applicant!!");
+			// return null;
+			throw new ApplicantNotfoundByIdException("Failed to find Applicant!!");
 		}
 	}
 
@@ -107,9 +108,9 @@ public class ApplicantService {
 		}
 
 		else {
-			// throw new ApplicantNotfoundByIdException("Failed to delete Applicant!!");
+			throw new ApplicantNotfoundByIdException("Failed to delete Applicant!!");
 
-			return null;
+			// return null;
 		}
 
 	}
@@ -131,10 +132,9 @@ public class ApplicantService {
 			responseStructure.setData(applicantDto);
 
 			return new ResponseEntity<ResponseStructure<ApplicantDto>>(responseStructure, HttpStatus.OK);
-		}
-		else {
-			return null;
-			//throw new ApplicantNotfoundByIdException("Failed to update Applicant!!");
+		} else {
+			// return null;
+			throw new ApplicantNotfoundByIdException("Failed to update Applicant!!");
 		}
 	}
 

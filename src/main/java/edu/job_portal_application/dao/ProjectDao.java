@@ -18,15 +18,9 @@ public class ProjectDao {
 		return projectRepo.save(project);
 	}
 
-	public Project getProjectById(int applicantId) {
-
-		Optional<Project> applicant = projectRepo.findById(applicantId);
-		if (applicant.isPresent()) {
-			return applicant.get();
-
-		} else {
-			return null;
-		}
+	public Optional<Project> getProjectById(int applicantId) {
+		return projectRepo.findById(applicantId);
+	
 
 	}
 
